@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const fileUpload = require('express-fileupload');
 const sharp = require('sharp');
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -93,8 +92,6 @@ app.post('/api/member', async (req, res) => {
     let responseObj = { statusCode: 200, status: 'success', message: 'Member updated successfully.', data: [] };
     try {
         const dbObj = await connectDb();
-        //var memberInfoObj = JSON.parse(fs.readFileSync('./src/database/memberInfo.json', 'utf8'));
-        //fs.writeFileSync(backUpFileName, JSON.stringify(memberInfoObj)); //back before add/edit
 
         let memberObj = Object.assign(req.body.data.memberObj, {});
         memberObj.dateUpdated = `${new Date().toDateString()}, ${new Date().toLocaleTimeString()}`;
