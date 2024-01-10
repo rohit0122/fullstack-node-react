@@ -11,7 +11,7 @@ function DeleteMember(props) {
 
   const deleteMemberInfo = async (memberId) => {
     let apiRes = await axios.delete(
-      `http://localhost:3001/api/member/${memberId}`
+      `${process.env.REACT_APP_LOCAL_SERVER_URL}api/member/${memberId}`
     );
     apiRes = await apiRes.data;
     //return memberData;

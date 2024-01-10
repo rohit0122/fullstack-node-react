@@ -75,7 +75,7 @@ function MemberFormModal(props) {
     if (primaryPhoto || spousePhoto) {
       const dataToSend = { primaryPhoto, spousePhoto };
       let uploadImageInfo = await axios.post(
-        "http://localhost:3001/api/uploadImage",
+        `${process.env.REACT_APP_LOCAL_SERVER_URL}api/uploadImage`,
         dataToSend,
         {
           headers: {
