@@ -17,6 +17,11 @@ const app = express();
 app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
+
+app.use('/', (req, res) => {
+    res.send('Server is running.');
+});
+
 app.use(
     fileUpload({
         limits: {
@@ -101,7 +106,7 @@ app.post('/api/member', async (req, res) => {
             await dbObj.insertOne(memberObj);
             console.log('Member inserted successfully');
         } else if (null !== memberId) {
-            await dbObj.updateOne({ id: memberId }, { $set: { memberInfo: memberObj.memberInfo, spouseInfo: memberObj.spouseInfo,  dateUpdated: memberObj.dateUpdated} });
+            await dbObj.updateOne({ id: memberId }, { $set: { memberInfo: memberObj.memberInfo, spouseInfo: memberObj.spouseInfo, dateUpdated: memberObj.dateUpdated } });
             console.log('Member udpated successfully');
         }
     } catch (e) {
