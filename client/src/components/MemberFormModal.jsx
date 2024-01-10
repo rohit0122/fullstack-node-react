@@ -151,7 +151,7 @@ function MemberFormModal(props) {
     //console.log('finalDataObjfinalDataObjfinalDataObjfinalDataObj', finalDataObj);
 //return;
     await updateMemberInfoInDb(memberObjData, isNewEntry);
-    //await props.loadLatestMemberInfo();
+    await props.loadLatestMemberInfo();
     await props.handleClose();
   };
 

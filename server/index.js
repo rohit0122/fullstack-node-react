@@ -1,9 +1,10 @@
 const express = require('express');
+require('dotenv').config();
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const sharp = require('sharp');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const mongoURL = 'mongodb+srv://rohit:FrCfQ6E1djNdwOkg@familytree.ew4pkul.mongodb.net/?retryWrites=true&w=majority';
+const mongoURL = process.env.MONGO_URL;
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(mongoURL, {
     serverApi: {
@@ -175,10 +176,10 @@ async function connectDb() {
             // Connect the client to the server	(optional starting in v4.7)
             await client.connect();
             // Send a ping to confirm a successful connection
-            const db = client.db("sample_mflix");
+            const db = client.db(process.env.MONGO_DB);
             await db.command({ ping: 1 });
 
-            dbCollection = db.collection('family_members');
+            dbCollection = db.collection(process.env.MONGO_COLLECTION);
             console.log("Pinged your deployment. You successfully connected to MongoDB!");
         }
     } catch (e) {
