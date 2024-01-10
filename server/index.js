@@ -50,7 +50,7 @@ app.post('/api/uploadImage', async (req, res) => {
             let imageName = "member_" + randomNumber + image.primaryPhoto.name;
             //image.primaryPhoto.mv(__dirname + '/../../public/upload/' + imageName);
             //console.log('image.primaryPhotoimage.primaryPhoto', image.primaryPhoto)
-            await sharp(image.primaryPhoto.data)
+            /*await sharp(image.primaryPhoto.data)
                 .resize(200, 200)
                 .jpeg({ mozjpeg: true })
                 .toFile(photoUploadPath + imageName)
@@ -60,11 +60,21 @@ app.post('/api/uploadImage', async (req, res) => {
                 .catch(err => {
                     console.log('Primary image upload error')
                 });
+*/
+ const primaryImg = await sharp(image.primaryPhoto.data)
+.resize(200, 200)
+.jpeg({ mozjpeg: true }).toBuffer();
+responseObj.data.primaryPhoto  =  'data:image/png;base64, '+ primaryImg.toString('base64');
 
+//console.log('imageBlobimageBlobimageBlob',responseObj.data.primaryPhoto);return;
         }
         if (image.spousePhoto) {
             console.log('inside spousePhoto');
-            let imageName = "spouse_" + randomNumber + image.spousePhoto.name;
+            const spouseImg = await sharp(image.spousePhoto.data)
+            .resize(200, 200)
+            .jpeg({ mozjpeg: true }).toBuffer();
+            responseObj.data.spousePhoto  =  'data:image/png;base64, '+ spouseImg.toString('base64');
+            /*let imageName = "spouse_" + randomNumber + image.spousePhoto.name;
             //image.spousePhoto.mv(__dirname + '/../../public/upload/' + imageName);
             //responseObj.data.spousePhoto = imageName;
             await sharp(image.spousePhoto.data)
@@ -76,7 +86,7 @@ app.post('/api/uploadImage', async (req, res) => {
                 })
                 .catch(err => {
                     console.log('Spouse image upload error')
-                });
+                });*/
         }
 
     } catch (e) {
