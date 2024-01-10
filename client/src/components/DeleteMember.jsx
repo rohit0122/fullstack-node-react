@@ -10,6 +10,8 @@ function DeleteMember(props) {
   const [deleteApiRes, setDeleteApiRes] = useState({});
 
   const deleteMemberInfo = async (memberId) => {
+    await props.showLoader(true);
+
     let apiRes = await axios.delete(
       `${process.env.REACT_APP_LOCAL_SERVER_URL}api/member/${memberId}`
     );
@@ -19,6 +21,7 @@ function DeleteMember(props) {
     setDeleteApiRes(apiRes);
     await props.loadLatestMemberInfo();
     setTimeout(props.handleClose, 1000);
+    await props.showLoader(false);
   };
 
   return (

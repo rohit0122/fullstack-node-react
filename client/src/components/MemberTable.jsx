@@ -5,9 +5,10 @@ import MemberFormModal from "./MemberFormModal";
 import axios from "axios";
 import { buildImageForView } from "../contants/global";
 import DeleteMember from "./DeleteMember";
+import Loader from "../components/Loader";
 
 export default function MemberTable(props) {
-
+  const [showLoader, setShowLoader] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [memberObj, setMemberObj] = useState({
     memberId: null,
@@ -51,10 +52,13 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
   };
 
   const getMemberInfoFromAPI = async () => {
+    await setShowLoader(true);
     let memberData = await axios.get(`${process.env.REACT_APP_LOCAL_SERVER_URL}api/member`);
     memberData = await memberData.data.data;
     console.log("memberDatamemberDatamemberData", memberData);
     setMemberDataObj(memberData);
+    await setShowLoader(false);
+
     //return memberData;
   };
 
@@ -245,6 +249,7 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
           handleClose={handleFormModalClose}
           memberObj={memberObj}
           loadLatestMemberInfo={getMemberInfoFromAPI}
+          showLoader={setShowLoader}
         />
       )}
 
@@ -253,8 +258,10 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
           handleClose={handleDeleteModalClose}
           memberObj={memberObj}
           loadLatestMemberInfo={getMemberInfoFromAPI}
+          showLoader={setShowLoader}
         />
       )}
+    <Loader show={showLoader} />
     </>
   );
 }

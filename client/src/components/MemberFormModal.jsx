@@ -72,6 +72,7 @@ function MemberFormModal(props) {
   };
 
   const handleUploadImage = async (memberId, primaryPhoto, spousePhoto) => {
+
     if (primaryPhoto || spousePhoto) {
       const dataToSend = { primaryPhoto, spousePhoto };
       let uploadImageInfo = await axios.post(
@@ -90,6 +91,8 @@ function MemberFormModal(props) {
     return {};
   };
   const processSubmittedForm = async (formData) => {
+    await props.showLoader(true);
+
     //console.log(' props.memberObj',  props.memberObj)
     let randomValue = "";
     let newMemberId = "";
@@ -153,6 +156,8 @@ function MemberFormModal(props) {
     await updateMemberInfoInDb(memberObjData, isNewEntry);
     await props.loadLatestMemberInfo();
     await props.handleClose();
+    await props.showLoader(false);
+
   };
 
   return (
