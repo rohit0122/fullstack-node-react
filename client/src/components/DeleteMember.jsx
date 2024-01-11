@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function DeleteMember(props) {
-  //console.log("PROPS:::::::", props.memberObj);
+  ////console.log("PROPS:::::::", props.memberObj);
 
   const [deleteApiRes, setDeleteApiRes] = useState({});
 
@@ -17,7 +17,7 @@ function DeleteMember(props) {
     );
     apiRes = await apiRes.data;
     //return memberData;
-    console.log('apiResapiResapiResapiRes', apiRes)
+    //console.log('apiResapiResapiResapiRes', apiRes)
     setDeleteApiRes(apiRes);
     await props.loadLatestMemberInfo();
     setTimeout(props.handleClose, 1000);

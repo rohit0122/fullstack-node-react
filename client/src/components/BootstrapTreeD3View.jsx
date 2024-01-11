@@ -108,7 +108,7 @@ export function BootstrapTreeD3View(props) {
   const renderD3Chart = async () => {
     try {
       const memberData = await getMemberInfoFromAPI();
-      console.log("memberDatamemberDatamemberData", memberData);
+      //console.log("memberDatamemberDatamemberData", memberData);
 
       orgChartObj = new OrgChart()
         .container("#d3Org")
@@ -157,7 +157,7 @@ export function BootstrapTreeD3View(props) {
         });
       orgChartObj.render(); // render chart
     } catch (err) {
-      console.log("Error occured when fetching books");
+      //////console.log("Error occured when fetching books");
     }
   };
   return (

@@ -34,11 +34,11 @@ app.use(
 const photoUploadPath = __dirname + '/../../public/upload/';
 
 app.post('/api/uploadImage', async (req, res) => {
-    //console.log('reqdata', req.files);
+    ////console.log('reqdata', req.files);
     const randomNumber = new Date().getTime().toString().split("").reverse().join("").substring(0, 4);
     const image = req.files;
 
-    //console.log('imageimage', image.primaryPhoto);return;
+    ////console.log('imageimage', image.primaryPhoto);return;
     // If no image submitted, exit
     //if (!image) return res.sendStatus(400);
 
@@ -66,7 +66,7 @@ app.post('/api/uploadImage', async (req, res) => {
 .jpeg({ mozjpeg: true }).toBuffer();
 responseObj.data.primaryPhoto  =  'data:image/png;base64, '+ primaryImg.toString('base64');
 
-//console.log('imageBlobimageBlobimageBlob',responseObj.data.primaryPhoto);return;
+////console.log('imageBlobimageBlobimageBlob',responseObj.data.primaryPhoto);return;
         }
         if (image.spousePhoto) {
             console.log('inside spousePhoto');
@@ -85,7 +85,7 @@ responseObj.data.primaryPhoto  =  'data:image/png;base64, '+ primaryImg.toString
                     responseObj.data.spousePhoto = imageName;
                 })
                 .catch(err => {
-                    console.log('Spouse image upload error')
+                    //console.log('Spouse image upload error')
                 });*/
         }
 
@@ -136,7 +136,7 @@ app.get('/api/member', async (req, res) => {
     } catch (e) {
         responseObj = { statusCode: 200, status: 'danger', message: e.message };
     }
-    console.log('memberInfoObj', memberInfoObj);
+    //console.log('memberInfoObj', memberInfoObj);
     res.status(responseObj.statusCode).json(responseObj);
 });
 
@@ -148,11 +148,11 @@ app.delete('/api/member/:id', async (req, res) => {
         try {
             const dbObj = await connectDb();
             // delete member
-            console.log('Deleting member ', memberId);
+            //console.log('Deleting member ', memberId);
             await dbObj.deleteMany({ id: memberId });
 
             // delete associated child if any
-            console.log('Deleting child for ', memberId);
+            //console.log('Deleting child for ', memberId);
             await dbObj.deleteMany({ parentId: memberId });
             responseObj = { statusCode: 200, status: 'success', message: 'Member delete successfully.', data: [] };
 
@@ -171,7 +171,7 @@ app.get('/api/test', async (req, res) => {
     } catch (e) {
         console.log('Connected error ', e.message);
     }
-    console.log('reqdata', req.body)
+    //console.log('reqdata', req.body)
     res.json({ message: "Hello from server!" });
 });
 

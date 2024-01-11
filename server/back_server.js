@@ -41,7 +41,7 @@ app.post('/api/uploadImage', async (req, res) => {
     try {
         // Move the uploaded image to our upload folder
         if (image.primaryPhoto) {
-            console.log('inside primary');
+            //console.log('inside primary');
             let imageName = "member_" + randomNumber + image.primaryPhoto.name;
             //image.primaryPhoto.mv(__dirname + '/../../public/upload/' + imageName);
             //console.log('image.primaryPhotoimage.primaryPhoto', image.primaryPhoto)
@@ -53,12 +53,12 @@ app.post('/api/uploadImage', async (req, res) => {
                     responseObj.data.primaryPhoto = imageName;
                 })
                 .catch(err => {
-                    console.log('Primary image upload error')
+                    //console.log('Primary image upload error')
                 });
 
         }
         if (image.spousePhoto) {
-            console.log('inside spousePhoto');
+            //console.log('inside spousePhoto');
             let imageName = "spouse_" + randomNumber + image.spousePhoto.name;
             //image.spousePhoto.mv(__dirname + '/../../public/upload/' + imageName);
             //responseObj.data.spousePhoto = imageName;
@@ -89,7 +89,7 @@ app.post('/api/member', (req, res) => {
     const memberId = req.body.data.memberObj.id;
     const isNewEntry = req.body.data.isNewEntry;
     let backUpFileName = `./src/database/backup/${(new Date().getTime())}_memberInfo.json`;
-    //console.log('memberIdmemberIdmemberId', memberId)
+    ////console.log('memberIdmemberIdmemberId', memberId)
     let responseObj = { statusCode: 200, status: 'success', message: 'Member updated successfully.', data: [] };
     try {
         var memberInfoObj = JSON.parse(fs.readFileSync('./src/database/memberInfo.json', 'utf8'));
@@ -103,17 +103,17 @@ app.post('/api/member', (req, res) => {
         } else if (null !== memberId) {
             //find member id and index to edit the record
             let memberIndex = memberInfoObj.findIndex((item) => item.id === memberId);
-            //console.log('memberIndexmemberIndexmemberIndexmemberIndex', memberIndex);
+            ////console.log('memberIndexmemberIndexmemberIndexmemberIndex', memberIndex);
             memberInfoObj[memberIndex] = memberObj;
         }
-        //console.log('memberInfoObjmemberInfoObjmemberInfoObj', memberInfoObj)
+        ////console.log('memberInfoObjmemberInfoObjmemberInfoObj', memberInfoObj)
 
 
         fs.writeFileSync('./src/database/memberInfo.json', JSON.stringify(memberInfoObj));
     } catch (e) {
         responseObj = { statusCode: 200, status: 'danger', message: e.message };
     }
-    //console.log('memberInfoObj', memberInfoObj);
+    ////console.log('memberInfoObj', memberInfoObj);
     res.status(responseObj.statusCode).json(responseObj);
 });
 
@@ -128,7 +128,7 @@ app.get('/api/member', async (req, res) => {
     } catch (e) {
         responseObj = { statusCode: 200, status: 'danger', message: e.message };
     }
-    console.log('memberInfoObj', memberInfoObj);
+    //console.log('memberInfoObj', memberInfoObj);
     res.status(responseObj.statusCode).json(responseObj);
 });
 
@@ -136,7 +136,7 @@ app.get('/api/member', async (req, res) => {
 app.delete('/api/member/:id', (req, res) => {
     let responseObj = { statusCode: 200, status: 'danger', message: 'Member delete failed.', data: [] };
     let backUpFileName = `./src/database/backup/${(new Date().getTime())}_memberInfo.json`;
-    //console.log('req.params.id', req.params.id);
+    ////console.log('req.params.id', req.params.id);
     if (!isNaN(parseInt(req.params.id))) {
         const memberId = parseInt(req.params.id);
         try {
@@ -145,7 +145,7 @@ app.delete('/api/member/:id', (req, res) => {
 
             memberInfoObj = memberInfoObj.filter(item => item.id !== memberId);
             memberInfoObj = memberInfoObj.filter(item => item.parentId !== memberId);
-            //console.log('memberInfoObj==========================', memberInfoObj);
+            ////console.log('memberInfoObj==========================', memberInfoObj);
             fs.writeFileSync('./src/database/memberInfo.json', JSON.stringify(memberInfoObj));
             responseObj = { statusCode: 200, status: 'success', message: 'Member delete successfully.', data: [] };
 

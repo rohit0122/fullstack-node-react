@@ -19,12 +19,12 @@ export function TreeD3View(props) {
     /*const data = await d3.csv(
           'https://raw.githubusercontent.com/bumbeishvili/sample-data/main/org.csv'
         );
-        console.log('datadatadatadatadata', data);
+        //console.log('datadatadatadatadata', data);
         */
     (async () => {
       try {
         const memberData = await getMemberInfoFromAPI();
-        console.log("memberDatamemberDatamemberData", memberData);
+        //console.log("memberDatamemberDatamemberData", memberData);
 
         const orgChartObj = new OrgChart()
           .container("#d3Org")
@@ -195,7 +195,7 @@ export function TreeD3View(props) {
           });
         orgChartObj.render(); // render chart
       } catch (err) {
-        console.log("Error occured when fetching books");
+        //console.log("Error occured when fetching books");
       }
     })();
   }, []);

@@ -40,7 +40,7 @@ export default function MemberTable(props) {
       // add member
       memberObjInfo = { memberId: null, parentId: parentId, memberName, wholeMemberObject };
     }
-console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
+//console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
     setMemberObj(memberObjInfo);
     handleFormModalShow();
   };
@@ -55,7 +55,7 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
     await setShowLoader(true);
     let memberData = await axios.get(`${process.env.REACT_APP_LOCAL_SERVER_URL}api/member`);
     memberData = await memberData.data.data;
-    console.log("memberDatamemberDatamemberData", memberData);
+    //console.log("memberDatamemberDatamemberData", memberData);
     setMemberDataObj(memberData);
     await setShowLoader(false);
 
@@ -64,7 +64,7 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
 
   const exportAsCSV = async ()=>{
     let flatMemberObject = {...memberDataObj}; 
-    console.log('flatMemberObject====', flatMemberObject);
+    //console.log('flatMemberObject====', flatMemberObject);
   }
 
   useEffect(() => {
@@ -72,7 +72,7 @@ console.log('memberObjInfomemberObjInfomemberObjInfo', memberObjInfo)
       try {
         await getMemberInfoFromAPI();
       } catch (err) {
-        console.log("Error occured when fetching books");
+        //console.log("Error occured when fetching books");
       }
     })();
   }, []);

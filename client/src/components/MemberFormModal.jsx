@@ -66,7 +66,7 @@ function MemberFormModal(props) {
     await axios
       .post(`${process.env.REACT_APP_LOCAL_SERVER_URL}api/member`, dataToSend)
       .then((response) => {
-        console.log("API Response ", response);
+        //console.log("API Response ", response);
         alert('Member information saved.');
       });
   };
@@ -98,7 +98,7 @@ function MemberFormModal(props) {
     let newMemberId = "";
     let memberObjData = "";
     let isNewEntry = null === props.memberObj.memberId;
-    console.log("isNewEntryisNewEntryisNewEntryisNewEntry", isNewEntry);
+    //console.log("isNewEntryisNewEntryisNewEntryisNewEntry", isNewEntry);
     if (isNewEntry) {
       randomValue = Math.random().toString().substring(2, 6);
       newMemberId = await parseInt(
@@ -114,8 +114,8 @@ function MemberFormModal(props) {
     }
 
     /*console.log("FOrm Data", formData);
-    console.log("FOrm Data", typeof formData.primaryPhoto.name);
-    console.log("FOrm Data", typeof formData.spousePhoto.name);*/
+    //console.log("FOrm Data", typeof formData.primaryPhoto.name);
+    //console.log("FOrm Data", typeof formData.spousePhoto.name);*/
 
     const uploadedImageInfo = await handleUploadImage(
       newMemberId,
@@ -148,7 +148,7 @@ function MemberFormModal(props) {
         dod: formData.spouseDod,
       },
     };
-    console.log("memberObjDatamemberObjData", memberObjData);
+    //console.log("memberObjDatamemberObjData", memberObjData);
     //let finalDataObj = Object.assign(dummyData, {});
     //finalDataObj.push(memberObjData);
     //console.log('finalDataObjfinalDataObjfinalDataObjfinalDataObj', finalDataObj);

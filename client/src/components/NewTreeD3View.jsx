@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { OrgChart } from "d3-org-chart";
-import * as d3 from "d3";
-import { Button, Card, Col, Row, Table } from "react-bootstrap";
-import ReactDOMServer from "react-dom/server";
-import { dummyData } from "../contants/dummy";
 import axios from "axios";
 import { buildImageForView } from "../contants/global";
 import { jsPDF } from "jspdf";
@@ -27,7 +23,7 @@ export function NewTreeD3View(props) {
 
     // Get chart nodes
     const data = orgChartObj.data();
-    console.log('eeeee', data)
+    //console.log('eeeee', data)
     // Mark all previously expanded nodes for collapse
     data.forEach((d) => (d._expanded = false));
 
@@ -43,7 +39,7 @@ export function NewTreeD3View(props) {
     // Update data and rerender graph
     orgChartObj.data(data).render().fit();
 
-    console.log('filtering chart', e.target.value);
+    //console.log('filtering chart', e.target.value);
   }
 
   const downloadPdf = () => {
@@ -73,7 +69,7 @@ export function NewTreeD3View(props) {
     /*const data = await d3.csv(
           'https://raw.githubusercontent.com/bumbeishvili/sample-data/main/org.csv'
         );
-        console.log('datadatadatadatadata', data);
+        //console.log('datadatadatadatadata', data);
         */
         renderD3Chart();
   }, []);
@@ -82,7 +78,7 @@ export function NewTreeD3View(props) {
     
       try {
         const memberData = await getMemberInfoFromAPI();
-        console.log("memberDatamemberDatamemberData", memberData);
+        //console.log("memberDatamemberDatamemberData", memberData);
 
          orgChartObj = new OrgChart()
           .container("#d3Org")
@@ -123,9 +119,7 @@ export function NewTreeD3View(props) {
                         </div>
                         <div style="font-size:15px;color:#08011E;margin-left:10px;margin-top:10px">  ${
                           d.data.memberInfo.fullName
-                        } ${d.data.spouseInfo.fullName ? " & " : ""}${
-                          d.data.spouseInfo.fullName
-                        }</div>
+                        } ${d.data.spouseInfo.fullName ? (" & " +  d.data.spouseInfo.fullName): ""}</div>
                         <div style="color:#716E7B;margin-left:10px;margin-top:3px;font-size:10px;" class="text-truncate"> ${
                           d.data.memberInfo.address
                         } </div>
